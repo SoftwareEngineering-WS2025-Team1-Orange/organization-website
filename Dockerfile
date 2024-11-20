@@ -4,12 +4,13 @@ WORKDIR /organization-website
 
 COPY package*.json ./
 
-RUN npm ci
+RUN npm install --production
 
 COPY . .
 
-EXPOSE 4200
+EXPOSE 8080
 
 RUN npm run build --omit=dev
 
-CMD ["http-server", "'dist/organization-website/browser'"]
+CMD ["npm", "run", "start:server"]
+
