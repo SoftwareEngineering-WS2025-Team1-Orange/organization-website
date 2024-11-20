@@ -1,4 +1,4 @@
-FROM node:22
+FROM node:22 AS builder
 
 WORKDIR /organization-website
 
@@ -8,9 +8,14 @@ RUN npm ci
 
 COPY . .
 
-EXPOSE 8080
-
 RUN npm run build --omit=dev
 
-CMD ["npm", "run", "start:server"]
+FROM nginx:1.27.2-bookworm AS runner
+
+WORKDIR /
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /organization-website/dist/organization-website/browser /usr/share/nginx/html/organization-website
+
+EXPOSE 80
 
