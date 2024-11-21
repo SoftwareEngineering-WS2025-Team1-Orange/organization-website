@@ -50,5 +50,21 @@
       "prettier --write --ignore-unknown",
       "eslint --fix"
     ]
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "html"
+        }
+      },
+      {
+        "files": "*.component.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
   }
 }
