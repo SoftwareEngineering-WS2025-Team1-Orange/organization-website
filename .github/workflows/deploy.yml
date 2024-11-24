@@ -1,4 +1,4 @@
-name: [prod] Deploy Docker Container
+name: "Build release"
 
 on:
   push:

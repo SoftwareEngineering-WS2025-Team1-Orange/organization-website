@@ -1,4 +1,4 @@
-name: [preview] Deploy Docker Container
+name: "Build preview"
 
 on:
   push:
