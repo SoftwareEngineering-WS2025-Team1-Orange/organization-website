@@ -47,5 +47,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ env.repo }}:latest
             ${{ steps.meta.outputs.tags }}
+            ghcr.io/${{ env.repo }}:latest
