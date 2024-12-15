@@ -1,4 +1,46 @@
-.headerbackground {
+.header_background {
   height: 75px;
-  border-bottom: solid white;
+  border-bottom: solid var(--white);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 24px;
+
+  color: var(--white);
+}
+
+.logo {
+}
+
+.links,
+.login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 24px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.signup {
+  display: grid;
+  grid-template-areas: "single";
+
+  a {
+    grid-area: single;
+    padding: 0 16px;
+  }
+
+  div {
+    grid-area: single;
+
+    background-color: var(--action);
+    opacity: 25%;
+    border-radius: 10px;
+  }
 }
