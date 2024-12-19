@@ -1,9 +1,28 @@
 <div class="card">
   <h2>Register an Organization</h2>
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>name</mat-label>
-      <input matInput>
-    </mat-form-field>
-  </form>
+  <mat-form-field>
+    <mat-label>name</mat-label>
+    <input matInput [formControl]="form.controls.name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>address</mat-label>
+    <input matInput [formControl]="form.controls.address">
+
+  </mat-form-field><mat-form-field>
+    <mat-label>contact</mat-label>
+    <input matInput [formControl]="form.controls.contact">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>mail</mat-label>
+    <input matInput [formControl]="form.controls.address">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>address</mat-label>
+    <input matInput [formControl]="form.controls.address">
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" (click)="register()">Submit</button>
 </div>
