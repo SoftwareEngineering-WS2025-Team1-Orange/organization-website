@@ -14,5 +14,19 @@ h2 {
 
 mat-form-field {
   width: 100%;
+
+}
+
+:host ::ng-deep .mdc-text-field--filled {
+  background-color: transparent !important;
+  border-bottom: var(--gray) solid !important;
+
+  label {
+    color: var(--gray) !important;
+  }
+
+  input {
+    color: var(--white) !important;
+  }
 }
 

@@ -1,16 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@use '@angular/material' as mat;
-
-@include mat.core-theme(mat.$amber-palette);
-
 :root {
   --primary: #182E42;
   --secondary: #32475d;
   --action: #4ac88b;
   --white: #ffffff;
+  --gray: #9BA1A8;
 }
 
 body {
   margin: 0;
 }
-
