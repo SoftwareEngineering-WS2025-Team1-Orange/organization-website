@@ -37,7 +37,7 @@ export class SignUpComponent {
   });
 
   register() {
-    this.service.ngoPost({
+    this.service.registerNGO({
       name: this.form.controls.name.value ?? '',
       address: this.form.controls.address.value ?? '',
       contact: this.form.controls.contact.value ?? '',

@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class NGOService {
-  public ngoPost(nGOPost: NGOPost): Observable<HttpResponse<any>>{
+  public registerNGO(nGOPost: NGOPost): Observable<HttpResponse<any>>{
     alert(JSON.stringify(["post NGO", nGOPost]));
 
     const res = new HttpResponse({ status: 200 });
