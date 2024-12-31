@@ -1,28 +1,40 @@
 <div class="card">
-  <h2>Register an Organization</h2>
-  <mat-form-field>
-    <mat-label>name</mat-label>
-    <input matInput [formControl]="form.controls.name">
-  </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>address</mat-label>
-    <input matInput [formControl]="form.controls.address">
+  <div class="content">
 
-  </mat-form-field><mat-form-field>
-    <mat-label>contact</mat-label>
-    <input matInput [formControl]="form.controls.contact">
-  </mat-form-field>
+    <h2>Register an Organization</h2>
+    <mat-form-field>
+      <mat-label>name</mat-label>
+      <input matInput [formControl]="form.controls.name">
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>mail</mat-label>
-    <input matInput type="email" [formControl]="form.controls.mail">
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>address</mat-label>
+      <input matInput [formControl]="form.controls.address">
 
-  <mat-form-field>
-    <mat-label>password</mat-label>
-    <input matInput type="password" [formControl]="form.controls.password">
-  </mat-form-field>
+    </mat-form-field><mat-form-field>
+      <mat-label>contact</mat-label>
+      <input matInput [formControl]="form.controls.contact">
+    </mat-form-field>
 
-  <button mat-flat-button color="primary" (click)="register()">Submit</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content">
+
+    <mat-form-field>
+      <mat-label>mail</mat-label>
+      <input matInput type="email" [formControl]="form.controls.mail">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>password</mat-label>
+      <input matInput type="password" [formControl]="form.controls.password">
+    </mat-form-field>
+
+    <button mat-flat-button color="green" (click)="register()">Submit</button>
+
+  </div>
+
 </div>

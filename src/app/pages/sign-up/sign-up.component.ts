@@ -4,8 +4,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { NGOService } from '../../mockService/nGOmock.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,16 +17,13 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     MatButtonModule,
     CommonModule,
+    MatDividerModule,
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
-
-  constructor(
-    private service: NGOService,
-  ) {
-  }
+  constructor(private service: NGOService) {}
 
   form = new FormGroup({
     name: new FormControl(''),
@@ -43,7 +40,6 @@ export class SignUpComponent {
       contact: this.form.controls.contact.value ?? '',
       mail: this.form.controls.mail.value ?? '',
       password: this.form.controls.password.value ?? '',
-    })
+    });
   }
-
 }
