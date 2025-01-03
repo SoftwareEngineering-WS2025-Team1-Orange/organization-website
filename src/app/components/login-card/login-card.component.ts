@@ -3,9 +3,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {NGOService} from '../../mockService/nGOmock.service';
 import {NgIf} from '@angular/common';
-import {TokenService} from '../../mockService/tokenmock.service';
+import {Router} from '@angular/router';
+import {NGOService} from '../../service';
+import {TokenService} from '../../service/api/token.service';
+import {firstValueFrom} from 'rxjs';
 
 @Component({
   selector: 'app-login-card',
@@ -34,6 +36,7 @@ export class LoginCardComponent {
   constructor(
     private ngoService: NGOService,
     private tokenService: TokenService,
+    private router: Router,
   ) {}
 
   register() {
@@ -41,15 +44,22 @@ export class LoginCardComponent {
       name: this.form.controls.name.value ?? '',
       address: this.form.controls.address.value ?? '',
       contact: this.form.controls.contact.value ?? '',
-      mail: this.form.controls.mail.value ?? '',
+      email: this.form.controls.mail.value ?? '',
       password: this.form.controls.password.value ?? '',
+      description: "This is an empty description",
+      website_url: ""
     });
+    this.router.navigate(['login']).then();
   }
 
-  login() {
-    this.tokenService.getToken(
+  async login() {
+    const token = await firstValueFrom(this.tokenService.getToken(
       this.form.controls.mail.value ?? '',
       this.form.controls.password.value ?? '',
-    )
+    ));
+
+
+
+    this.router.navigate(['overview']).then();
   }
 }
