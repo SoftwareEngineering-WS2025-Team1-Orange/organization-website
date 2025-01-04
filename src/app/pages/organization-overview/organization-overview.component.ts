@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NgoStorageService} from '../../services/ngo-storage.service';
+import { NgoStorageService } from '../../services/ngo-storage.service';
 
 @Component({
   selector: 'app-organization-overview',
@@ -9,8 +9,7 @@ import {NgoStorageService} from '../../services/ngo-storage.service';
   styleUrl: './organization-overview.component.scss',
 })
 export class OrganizationOverviewComponent {
-  constructor(public ngoStorage: NgoStorageService) {
-  }
+  constructor(public ngoStorage: NgoStorageService) {}
 
   protected readonly JSON = JSON;
 }

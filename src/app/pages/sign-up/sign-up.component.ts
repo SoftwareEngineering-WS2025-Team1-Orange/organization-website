@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import {LoginCardComponent} from '../../components/login-card/login-card.component';
+import { LoginCardComponent } from '../../components/login-card/login-card.component';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [
-    LoginCardComponent,
-  ],
+  imports: [LoginCardComponent],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })

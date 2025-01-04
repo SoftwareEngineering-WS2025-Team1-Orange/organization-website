@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import {NGOGet} from '../service/model/nGOGet';
-import {ReturnNGO} from '../service';
+import { ReturnNGO } from '../service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NgoStorageService {
-
-  isLoggedIn: boolean = false;
+  isLoggedIn = false;
 
   ngo: ReturnNGO | null = null;
 
-  login(ngo: ReturnNGO){
+  login(ngo: ReturnNGO) {
     this.isLoggedIn = true;
     this.ngo = ngo;
   }
