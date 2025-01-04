@@ -5,9 +5,9 @@ import {MatInputModule} from '@angular/material/input';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {Router} from '@angular/router';
-import {NGOService} from '../../service';
-import {TokenService} from '../../service/api/token.service';
+import {AuthService, NGOService} from '../../service';
 import {firstValueFrom} from 'rxjs';
+import {NgoStorageService} from '../../services/ngo-storage.service';
 
 @Component({
   selector: 'app-login-card',
@@ -35,12 +35,13 @@ export class LoginCardComponent {
 
   constructor(
     private ngoService: NGOService,
-    private tokenService: TokenService,
+    private authService: AuthService,
     private router: Router,
+    private ngoStorage: NgoStorageService,
   ) {}
 
-  register() {
-    this.ngoService.registerNGO({
+  async register() {
+    const res = await firstValueFrom(this.ngoService.registerNGO({
       name: this.form.controls.name.value ?? '',
       address: this.form.controls.address.value ?? '',
       contact: this.form.controls.contact.value ?? '',
@@ -48,18 +49,21 @@ export class LoginCardComponent {
       password: this.form.controls.password.value ?? '',
       description: "This is an empty description",
       website_url: ""
-    });
+    }));
     this.router.navigate(['login']).then();
   }
 
   async login() {
-    const token = await firstValueFrom(this.tokenService.getToken(
-      this.form.controls.mail.value ?? '',
-      this.form.controls.password.value ?? '',
-    ));
+    const token = await firstValueFrom(this.authService.getToken({
+      username: this.form.controls.mail.value ?? '',
+      password: this.form.controls.password.value ?? '',
+      grant_type: 'password',
+      "client_id": "string",
+      "client_secret": "string",
+    }));
+    const ngo = await firstValueFrom(this.ngoService.ngoControllerGetMeV1());
 
-
-
+    this.ngoStorage.login(ngo);
     this.router.navigate(['overview']).then();
   }
 }
