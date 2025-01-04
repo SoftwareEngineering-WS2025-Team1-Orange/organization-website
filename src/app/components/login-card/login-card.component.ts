@@ -5,9 +5,10 @@ import {MatInputModule} from '@angular/material/input';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {Router} from '@angular/router';
-import {AuthService, NGOService} from '../../service';
 import {firstValueFrom} from 'rxjs';
 import {NgoStorageService} from '../../services/ngo-storage.service';
+import {NGOService} from '../../mockService/nGOmock.service';
+import {AuthService} from '../../mockService/tokenmock.service';
 
 @Component({
   selector: 'app-login-card',
@@ -41,7 +42,7 @@ export class LoginCardComponent {
   ) {}
 
   async register() {
-    const res = await firstValueFrom(this.ngoService.registerNGO({
+    await firstValueFrom(this.ngoService.registerNGO({
       name: this.form.controls.name.value ?? '',
       address: this.form.controls.address.value ?? '',
       contact: this.form.controls.contact.value ?? '',
@@ -54,7 +55,7 @@ export class LoginCardComponent {
   }
 
   async login() {
-    const token = await firstValueFrom(this.authService.getToken({
+    await firstValueFrom(this.authService.getToken({
       username: this.form.controls.mail.value ?? '',
       password: this.form.controls.password.value ?? '',
       grant_type: 'password',
