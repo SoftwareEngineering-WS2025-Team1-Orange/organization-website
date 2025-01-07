@@ -1,7 +1,7 @@
-import { CreateNgo, ReturnNGO } from '../service';
 import { HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { CreateNgo, ReturnNGO } from '../../api';
 
 @Injectable({
   providedIn: 'root',
