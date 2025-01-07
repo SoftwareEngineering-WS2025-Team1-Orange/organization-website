@@ -5,7 +5,7 @@ import { AuthApi, Configuration, NGOApi } from '../../api';
   providedIn: 'root',
 })
 export class ApiService {
-  config = new Configuration({ basePath: 'preview-mainframe.sokutan.de' });
+  config = new Configuration({ basePath: 'https://preview-mainframe.sokutan.de/api/v1' });
   ngo = new NGOApi(this.config);
   auth = new AuthApi(this.config);
 }

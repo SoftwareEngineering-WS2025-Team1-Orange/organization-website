@@ -6,7 +6,7 @@ servers:
   - url: "{protocol}://{url}/api/v1"
     variables:
       url:
-        default: 'preview-organization.sokutan.de'
+        default: 'localhost:9000'
       protocol:
         enum:
           - http
