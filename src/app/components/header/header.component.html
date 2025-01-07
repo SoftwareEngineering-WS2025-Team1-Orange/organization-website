@@ -8,12 +8,18 @@
     <a mat-button [routerLink]="['/overview']">Your Organization</a>
   </div>
 
-  <div class="login">
-    <a mat-button [routerLink]="['/login']">Log in</a>
+  <div *ngIf="!storageService.isLoggedIn;then login else user"></div>
+  <ng-template #login>
+    <div class="login">
+      <a mat-button [routerLink]="['/login']">Log in</a>
 
-    <div class="signup">
-      <div></div>
-      <a mat-button [routerLink]="['/sign-up']">Sign up</a>
+      <div class="signup">
+        <div></div>
+        <a mat-button [routerLink]="['/sign-up']">Sign up</a>
+      </div>
     </div>
-  </div>
+  </ng-template>
+  <ng-template #user>
+    <button mat-button class="user">Hello {{storageService.ngo?.name}}</button>
+  </ng-template>
 </div>

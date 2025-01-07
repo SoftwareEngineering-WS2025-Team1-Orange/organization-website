@@ -15,7 +15,7 @@
 }
 
 .links,
-.login {
+.login{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,6 +26,11 @@
 a {
   text-decoration: none;
   color: var(--white) !important;
+}
+
+button {
+  color: var(--white) !important;
+  text-decoration: underline;
 }
 
 .signup {
