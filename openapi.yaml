@@ -1,0 +1,890 @@
+openapi: 3.1.0
+info:
+  title: Website-Mainframe communication
+  version: 0.1.0
+servers:
+  - url: "{protocol}://{url}/api/v1"
+    variables:
+      url:
+        default: 'preview-organization.sokutan.de'
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+
+paths:
+  /api-ngo/auth/token:
+    post:
+      operationId: getToken
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestToken'
+
+      responses:
+        '200':
+          description: Returns a Request_Token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseToken'
+        '403':
+          description: User does not have access to this resource
+
+  /api-ngo/auth/logout:
+    post:
+      operationId: logout
+      tags:
+        - Auth
+      parameters: [ ]
+      responses:
+        '201':
+          description: ''
+      security:
+        - OAuth2PasswordBearer: [ ]
+
+  /api-ngo/ngo/me:
+    get:
+      operationId: NgoController_getMe_v1
+      tags:
+        - NGO
+      parameters:
+        - name: filter_project_id
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: filter_category
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter_name_contains
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter_include_archived
+          required: false
+          in: query
+          schema:
+            type: boolean
+        - name: pagination_page
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pagination_page_size
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: sort_for
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sort_type
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/ReturnNGO'
+      security:
+        - OAuth2PasswordBearer: [ ]
+
+  /api-ngo/ngo/:
+    post:
+      operationId: registerNGO
+      tags:
+        - NGO
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/CreateNgo'
+      responses:
+        '201':
+          description: Creates an NGO Account
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/ReturnNgoWithoutProjects'
+
+  /api-ngo/ngo/{ngo_id}:
+    parameters:
+      - name: ngo_id
+        in: path
+        required: true
+        schema:
+          type: number
+    get:
+      operationId: getNGOByID
+      tags:
+        - NGO
+      parameters:
+        - name: filter_project_id
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: filter_category
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter_name_contains
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter_include_archived
+          required: false
+          in: query
+          schema:
+            type: boolean
+        - name: pagination_page
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pagination_page_size
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: sort_for
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sort_type
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/ReturnNGO'
+      security:
+        - OAuth2PasswordBearer: [ ]
+    put:
+      operationId: updateNGO
+      tags:
+        - NGO
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNGO'
+      responses:
+        '200':
+          description: Creates an NGO Account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnNgoWithoutProjects'
+
+      security:
+        - OAuth2PasswordBearer: [ ]
+
+    delete:
+      operationId: deleteNGO
+      tags:
+        - NGO
+      responses:
+        '200':
+          description: Removes an NGO Account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnNgoWithoutProjects'
+
+      security:
+        - OAuth2PasswordBearer: [ ]
+  /api-ngo/ngo/{ngo_id}/banner_uri:
+    patch:
+      operationId: updateBannerUriNgo
+      tags:
+        - NGO
+      parameters:
+        - name: ngo_id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                banner:
+                  type:
+                    - string
+                    - 'null'
+                  format: binary
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnNgoWithoutProjects'
+      security:
+        - OAuth2PasswordBearer: [ ]
+
+  /api-ngo/ngo/{ngo_id}/project:
+    get:
+      operationId: getProjects
+      tags:
+        - Project
+      parameters:
+        - name: 'ngo_id'
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: filter_project_id
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: filter_category
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter_name_contains
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter_include_archived
+          required: false
+          in: query
+          schema:
+            type: boolean
+        - name: filter_ngo_id
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: filter_ngo_name_contains
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pagination_page
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: pagination_page_size
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sort_type
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      security:
+        - OAuth2PasswordBearer: [ ]
+
+    post:
+      operationId: addProject
+      tags:
+        - Project
+      parameters:
+        - name: 'ngo_id'
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProject'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnProjectWithoutFav'
+      security:
+        - OAuth2PasswordBearer: [ ]
+
+  /api-ngo/ngo/{ngo_id}/project/{project_id}:
+    put:
+      operationId: updateProject
+      tags:
+        - Project
+      parameters:
+        - name: 'ngo_id'
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: 'project_id'
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnProjectWithoutFav'
+      security:
+        - OAuth2PasswordBearer: [ ]
+
+    delete:
+      operationId: deleteProject
+      tags:
+        - Project
+      parameters:
+        - name: ngo_id
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: project_id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnProjectWithoutFav'
+      security:
+        - OAuth2PasswordBearer: [ ]
+
+  /api-ngo/ngo/{ngo_id}/project/{project_id}/banner_uri:
+    patch:
+      operationId: ProjectController_patchProjectBanner_v1
+      tags:
+        - Project
+      parameters:
+        - name: ngo_id
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: project_id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                banner:
+                  type:
+                    - string
+                    - 'null'
+                  format: binary
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnProjectWithoutFav'
+      security:
+        - OAuth2PasswordBearer: [ ]
+
+  /ngo/{ngo_id}/project/{project_id}/donations:
+    parameters:
+      - name: ngo_id
+        in: path
+        required: true
+        schema:
+          type: number
+      - name: project_id
+        in: path
+        required: true
+        schema:
+          type: number
+    get:
+      operationId: getDonations
+      tags:
+        - Donations
+      responses:
+        '200':
+          description: Retruns all donations of a Project
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DonationGet'
+      security:
+        - OAuth2PasswordBearer: [ ]
+
+components:
+  schemas:
+    CreateNgo:
+      type: object
+      required:
+        - name
+        - website_url
+        - description
+        - address
+        - contact
+        - email
+        - password
+      properties:
+        name:
+          type: string
+          title: Name
+        website_url:
+          type: string
+          format: uri
+          title: Website Url
+        description:
+          type: string
+          title: Description
+        address:
+          type: string
+          title: Address
+        contact:
+          type: string
+          title: Contact
+        email:
+          type: string
+          format: email
+          title: E-Mail
+        password:
+          type: string
+          format: password
+          title: Password
+
+    ReturnNgoWithoutProjects:
+      type: object
+      required:
+        - id
+        - name
+        - website_url
+        - description
+        - banner_uri
+        - address
+        - contact
+        - scope
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        email:
+          type: string
+          format: email
+          title: E-Mail
+        website_url:
+          type: string
+          format: uri
+          title: Website URL
+        description:
+          type: string
+          title: Description
+        banner_uri:
+          type: string
+          format: uri
+          title: Banner URI
+        address:
+          type: string
+          title: Address
+        contact:
+          type: string
+          title: Contact
+        scope:
+          type: array
+          items:
+            type: string
+            enum:
+              - NOT_IMPLEMENTED
+          title: scope
+          default: [ ]
+
+    ReturnNGO:
+      type: object
+      required:
+        - id
+        - name
+        - website_url
+        - description
+        - banner_uri
+        - address
+        - contact
+        - scope
+        - projects
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        email:
+          type: string
+          format: email
+          title: E-Mail
+        website_url:
+          type: string
+          format: uri
+          title: Website URL
+        description:
+          type: string
+          title: Description
+        banner_uri:
+          type: string
+          format: uri
+          title: Banner URI
+        address:
+          type: string
+          title: Address
+        contact:
+          type: string
+          title: Contact
+        scope:
+          type: array
+          items:
+            type: string
+            enum:
+              - NOT_IMPLEMENTED
+          title: scope
+          default: [ ]
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaginatedProject'
+
+    UpdateNGO:
+      type: object
+      properties:
+        name:
+          type: string
+          title: Name
+        website_url:
+          type: string
+          format: uri
+          title: Website URL
+        description:
+          type: string
+          title: Description
+        address:
+          type: string
+          title: Address
+        contact:
+          type: string
+          title: Contact
+        email:
+          type: string
+          format: email
+          title: E-Mail
+
+    PaginatedProject:
+      type: object
+      required:
+        - pagination
+        - projects
+      properties:
+        pagination:
+          $ref: '#/components/schemas/ReturnPagination'
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReturnProjectWithoutFav'
+
+
+    ReturnPagination:
+      type: object
+      required:
+        - totalResults
+        - filteredResults
+        - currentPage
+        - numberOfPages
+      properties:
+        totalResults:
+          type: integer
+          title: Total results
+        filteredResults:
+          type: integer
+          title: Filtered results
+        currentPage:
+          type: integer
+          title: Current results
+        numberOfPages:
+          type: integer
+          title: Number of results
+
+    ReturnProjectWithoutFav:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - fundraising_goal
+        - fundraising_current
+        - fundraising_closed
+        - progress
+        - target_date
+        - createdAt
+        - updatedAt
+        - category
+        - ngoId
+      properties:
+        id:
+          type: number
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        banner_uri:
+          type: string
+          format: uri
+          title: Banner URI
+        fundraising_goal:
+          type: number
+          title: Fundraising goal
+          minimum: 1
+        fundraising_current:
+          type: number
+          title: Fundraising current
+        fundraising_closed:
+          type: boolean
+          title: Fundraising closed
+        progress:
+          type: number
+          title: Progress
+        target_date:
+          type: string
+          format: date-time
+          title: Target date
+        createdAt:
+          type: string
+          format: date-time
+          title: Created at
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updated at
+        category:
+          type: string
+          enum:
+            - Education
+            - Health
+            - Environment
+            - Human_Rights
+            - Animal_Rights
+            - Social
+            - OTHER
+          title: Category
+        ngoId:
+          type: integer
+          title: NGO Id
+
+    CreateProject:
+      type: object
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        fundraising_goal:
+          type: number
+          title: Fundraising goal
+          minimum: 1
+        target_date:
+          type: string
+          format: date-time
+          title: Target date
+        category:
+          type: string
+          enum:
+            - Education
+            - Health
+            - Environment
+            - Human_Rights
+            - Animal_Rights
+            - Social
+            - OTHER
+          title: Category
+      required:
+        - name
+        - description
+        - fundraising_goal
+        - target_date
+        - category
+
+    UpdateProjectDto:
+      type: object
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        fundraising_goal:
+          type: number
+          title: Fundraising goal
+          minimum: 1
+        category:
+          type: string
+          enum:
+            - Education
+            - Health
+            - Environment
+            - Human_Rights
+            - Animal_Rights
+            - Social
+            - OTHER
+          title: Category
+      required:
+        - name
+        - description
+        - category
+        - fundraising_goal
+
+    DonationGet:
+      type: object
+      required:
+        - amount
+        - donator
+      properties:
+        amount:
+          type: number
+        donator:
+          $ref: '#/components/schemas/DonatorBase'
+
+    DonatorBase:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+
+    RequestToken:
+      properties:
+        grant_type:
+          anyOf:
+            - type: string
+              pattern: password|refreshToken
+          title: Grant Type
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+        scope:
+          type: array
+          items:
+            type: string
+            enum:
+              - NOT_IMPLEMENTED
+          title: scope
+          default: [ ]
+        client_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Client Id
+        client_secret:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Client Secret
+      type: object
+      required:
+        - grant_type
+        - client_id
+        - client_secret
+      title: Request_Token
+
+    ResponseToken:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        token_type:
+          type: string
+          title: Token Type
+        expires_in:
+          type: integer
+          title: Expires In
+        scope:
+          type: array
+          items:
+            type: string
+            enum:
+              - NOT_IMPLEMENTED
+          title: scope
+          default: [ ]
+      type: object
+      required:
+        - access_token
+      title: Token
+
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: { }
+          tokenUrl: "./api-ngo/auth/token"
+          refreshUrl: "./api-ngo/auth/token"
