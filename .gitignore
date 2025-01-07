@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # open api
-/src/app/service
+/src/api

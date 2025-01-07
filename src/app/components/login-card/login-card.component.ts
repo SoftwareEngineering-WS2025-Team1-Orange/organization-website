@@ -11,7 +11,6 @@ import { AuthApi, Configuration, NGOApi } from '../../../api';
 import { basename } from '@angular/compiler-cli';
 import { ApiService } from '../../services/api.service';
 
-
 @Component({
   selector: 'app-login-card',
   standalone: true,
@@ -36,7 +35,7 @@ export class LoginCardComponent {
     password: new FormControl(''),
   });
 
-  config = new Configuration({basePath: 'preview-mainframe.sokutan.de'})
+  config = new Configuration({ basePath: 'preview-mainframe.sokutan.de' });
 
   constructor(
     private router: Router,
@@ -53,7 +52,7 @@ export class LoginCardComponent {
       password: this.form.controls.password.value ?? '',
       description: 'This is an empty description',
       website_url: '',
-    })
+    });
     this.router.navigate(['login']).then();
   }
 

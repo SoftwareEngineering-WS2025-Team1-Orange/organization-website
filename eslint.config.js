@@ -15,7 +15,7 @@ module.exports = tseslint.config(
     ],
     processor: angular.processInlineTemplates,
     ignores: [
-      "src/app/service/**"
+      "src/api/**"
     ],
     rules: {
       "@angular-eslint/directive-selector": [
