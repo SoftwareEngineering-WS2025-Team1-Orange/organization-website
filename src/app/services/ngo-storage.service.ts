@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ReturnNGO } from '../service';
+import { ReturnNGO } from '../../api';
 
 @Injectable({
   providedIn: 'root',

@@ -9,6 +9,7 @@ import { NgoStorageService } from '../../services/ngo-storage.service';
 
 import { AuthApi, Configuration, NGOApi } from '../../../api';
 import { basename } from '@angular/compiler-cli';
+import { ApiService } from '../../services/api.service';
 
 
 @Component({
@@ -40,10 +41,11 @@ export class LoginCardComponent {
   constructor(
     private router: Router,
     private ngoStorage: NgoStorageService,
+    private apiService: ApiService,
   ) {}
 
   async register() {
-    await new NGOApi(this.config).registerNGO({
+    await this.apiService.ngo.registerNGO({
       name: this.form.controls.name.value ?? '',
       address: this.form.controls.address.value ?? '',
       contact: this.form.controls.contact.value ?? '',
@@ -56,7 +58,7 @@ export class LoginCardComponent {
   }
 
   async login() {
-    await new AuthApi(this.config).getToken({
+    await this.apiService.auth.getToken({
       username: this.form.controls.mail.value ?? '',
       password: this.form.controls.password.value ?? '',
       grant_type: 'password',
@@ -64,7 +66,7 @@ export class LoginCardComponent {
       client_secret: 'string',
     });
 
-    const req = await new NGOApi(this.config).ngoControllerGetMeV1();
+    const req = await this.apiService.ngo.ngoControllerGetMeV1();
 
     this.ngoStorage.login(req.data);
     this.router.navigate(['overview']).then();
