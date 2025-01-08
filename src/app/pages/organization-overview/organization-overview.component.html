@@ -1,2 +1,24 @@
-<p>organization-overview works!</p>
-<p>{{ JSON.stringify(ngoStorage.ngo) }}</p>
+<input hidden type="file" #fileInput (change)="uploadImage($event)" />
+
+<div class="card big">
+  <div class="name">
+    <img
+      [src]="imageURL ?? ngoStorage.ngo?.banner_uri"
+      alt="banner"
+      class="ngoBanner"
+      width="60"
+      height="60"
+      *ngIf="imageURL || ngoStorage.ngo?.banner_uri; else upload"
+      (click)="fileInput.click()"
+    />
+    <ng-template #upload>
+      <div class="uploadBanner">
+        <button mat-icon-button (click)="fileInput.click()">
+          <mat-icon fontIcon="upload"></mat-icon>
+        </button>
+      </div>
+    </ng-template>
+    <h1>{{ ngoStorage.ngo?.name }}</h1>
+  </div>
+  <p>{{ ngoStorage.ngo?.description }}</p>
+</div>

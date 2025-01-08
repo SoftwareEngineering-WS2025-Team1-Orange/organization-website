@@ -24,7 +24,7 @@ export class NGOService {
       website_url: 'https://www.helpinghands.org',
       description:
         'Helping Hands is dedicated to making the world a better place through education, health, and environmental initiatives.',
-      banner_uri: 'https://example.com/banner.jpg',
+      banner_uri: '',
       address: '123 Charity Lane, Goodwill City, Country',
       contact: '+1234567890',
       scope: ['NOT_IMPLEMENTED'],

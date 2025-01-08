@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AuthApi, Configuration, NGOApi } from '../../api';
+import {
+  AuthApi,
+  Configuration,
+  DonationsApi,
+  NGOApi,
+  ProjectApi,
+} from '../../api';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +16,10 @@ export class ApiService {
   });
   ngo = new NGOApi(this.config);
   auth = new AuthApi(this.config);
+  project = new ProjectApi(this.config);
+  donation = new DonationsApi(this.config);
 
   setToken(token: string) {
     this.config.accessToken = token;
-    this.ngo = new NGOApi(this.config);
-    this.auth = new AuthApi(this.config);
   }
 }
