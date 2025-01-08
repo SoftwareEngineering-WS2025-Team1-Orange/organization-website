@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "prepare": "husky",
-    "generate:api": "rimraf src/api && openapi-generator-cli generate -i ./openapi.yaml --additional-properties=supportsES6=true,withSeparateModelsAndApi=true,apiPackage=apis,modelPackage=models -g typescript-axios -o ./src/api"
+    "generate:api": "rimraf src/api && openapi-generator-cli generate -i ./api-specification/specification-website.yaml --additional-properties=supportsES6=true,withSeparateModelsAndApi=true,apiPackage=apis,modelPackage=models -g typescript-axios -o ./src/api"
   },
   "private": true,
   "dependencies": {
