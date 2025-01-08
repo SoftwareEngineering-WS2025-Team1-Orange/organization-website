@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ReturnNGO } from '../../api';
-import {ActivatedRoute, Router} from '@angular/router';
-import {first} from 'rxjs';
+import { Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +12,6 @@ export class NgoStorageService {
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
   ) {}
 
   login(ngo: ReturnNGO) {
