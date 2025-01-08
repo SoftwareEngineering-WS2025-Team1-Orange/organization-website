@@ -1,6 +1,9 @@
 <input hidden type="file" #fileInput (change)="uploadImage($event)" />
 
 <div class="card big">
+  <button mat-icon-button class="editButton">
+    <mat-icon fontIcon="edit"></mat-icon>
+  </button>
   <div class="name">
     <img
       [src]="imageURL ?? ngoStorage.ngo?.banner_uri"
