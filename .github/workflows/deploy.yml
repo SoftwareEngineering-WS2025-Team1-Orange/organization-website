@@ -52,3 +52,12 @@ jobs:
           tags: |
             ${{ steps.meta.outputs.tags }}
             ghcr.io/${{ env.repo }}:latest
+
+  deploy:
+    name: "Deploy to prod"
+    runs-on: "ubuntu-latest"
+    needs: build-and-push-image
+
+    steps:
+      - name: "Deploy to prod via webhook"
+        run: curl -X POST ${{ secrets.PRODUCTION_WEBHOOK_URL }}
