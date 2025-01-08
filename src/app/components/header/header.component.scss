@@ -26,12 +26,18 @@
 a {
   text-decoration: none;
   color: var(--white) !important;
+
+  &[disabled] {
+    color: var(--gray) !important;
+  }
 }
 
 button {
   color: var(--white) !important;
   text-decoration: underline;
 }
+
+
 
 .signup {
   display: grid;

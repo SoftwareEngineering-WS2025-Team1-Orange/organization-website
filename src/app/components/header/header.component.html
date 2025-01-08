@@ -5,7 +5,7 @@
 
   <div class="links">
     <a mat-button [routerLink]="['/home']">Homepage</a>
-    <a mat-button [routerLink]="['/overview']">Your Organization</a>
+    <a mat-button [routerLink]="['/overview']" [disabled]="!storageService.ngo">Your Organization</a>
   </div>
 
   <div *ngIf="!storageService.isLoggedIn; then login; else user"></div>
