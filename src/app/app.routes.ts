@@ -9,4 +9,5 @@ export const routes: Routes = [
   { path: 'overview', component: OrganizationOverviewComponent },
   { path: 'login', component: LogInComponent },
   { path: 'sign-up', component: SignUpComponent },
+  { path: '**', redirectTo: '/home' },
 ];
