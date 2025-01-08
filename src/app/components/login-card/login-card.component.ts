@@ -6,7 +6,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgoStorageService } from '../../services/ngo-storage.service';
-import { Configuration } from '../../../api';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -32,8 +31,6 @@ export class LoginCardComponent {
     mail: new FormControl(''),
     password: new FormControl(''),
   });
-
-  config = new Configuration({ basePath: 'preview-mainframe.sokutan.de' });
 
   constructor(
     private router: Router,
