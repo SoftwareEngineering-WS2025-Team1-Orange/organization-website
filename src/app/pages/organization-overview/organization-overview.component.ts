@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgoStorageService } from '../../services/ngo-storage.service';
 import { ApiService } from '../../services/api.service';
 import { MatButtonModule } from '@angular/material/button';
-import { NgIf } from '@angular/common';
+import {NgIf, NgOptimizedImage} from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-organization-overview',
   standalone: true,
-  imports: [MatButtonModule, NgIf, MatIconModule],
+  imports: [MatButtonModule, NgIf, MatIconModule, NgOptimizedImage],
   templateUrl: './organization-overview.component.html',
   styleUrl: './organization-overview.component.scss',
 })
-export class OrganizationOverviewComponent implements OnInit{
+export class OrganizationOverviewComponent implements OnInit {
   imageURL: string | null = null;
 
   constructor(
@@ -23,7 +23,7 @@ export class OrganizationOverviewComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    if(!this.ngoStorage.ngo) {
+    if (!this.ngoStorage.ngo) {
       this.router.navigate(['/']).then();
     }
   }
@@ -39,5 +39,4 @@ export class OrganizationOverviewComponent implements OnInit{
       this.apiService.ngo.updateBannerUriNgo(ngo.id, file).then();
     }
   }
-
 }

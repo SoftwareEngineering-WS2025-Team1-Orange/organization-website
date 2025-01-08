@@ -4,9 +4,10 @@ import {
   Configuration,
   DonationsApi,
   NGOApi,
-  ProjectApi, ResponseToken,
+  ProjectApi,
+  ResponseToken,
 } from '../../api';
-import {TOKEN_KEY} from './constants';
+import { TOKEN_KEY } from './constants';
 
 @Injectable({
   providedIn: 'root',

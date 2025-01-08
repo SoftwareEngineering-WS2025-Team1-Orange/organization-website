@@ -29,6 +29,8 @@
 
 img.ngoBanner {
   border-radius: 30px;
+  height: 60px !important;
+  width: 60px !important;
 }
 
 .uploadBanner {
@@ -46,4 +48,9 @@ img.ngoBanner {
   position: absolute;
   top: 16px;
   right: 16px;
+}
+
+.banner-button{
+  width: 84px !important;
+  height: 84px !important;
 }

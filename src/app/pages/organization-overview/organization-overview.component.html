@@ -5,15 +5,15 @@
     <mat-icon fontIcon="edit"></mat-icon>
   </button>
   <div class="name">
-    <img
-      [src]="imageURL ?? ngoStorage.ngo?.banner_uri"
-      alt="banner"
-      class="ngoBanner"
-      width="60"
-      height="60"
-      *ngIf="imageURL || ngoStorage.ngo?.banner_uri; else upload"
-      (click)="fileInput.click()"
-    />
+    <button mat-icon-button (click)="fileInput.click()" class="banner-button" *ngIf="imageURL || ngoStorage.ngo?.banner_uri; else upload">
+      <img
+        [src]="imageURL ?? ngoStorage.ngo?.banner_uri"
+        alt="banner"
+        class="ngoBanner"
+        width="60"
+        height="60"
+      />
+    </button>
     <ng-template #upload>
       <div class="uploadBanner">
         <button mat-icon-button (click)="fileInput.click()">
