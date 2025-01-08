@@ -8,6 +8,8 @@ RUN npm ci
 
 COPY . .
 
+RUN npm run generate:api
+
 RUN npm run build --omit=dev
 
 FROM nginx:1.27.2-bookworm AS runner
