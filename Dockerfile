@@ -1,5 +1,8 @@
 FROM node:22 AS builder
 
+# Install Java
+RUN apt-get update && apt-get install -y openjdk-17-jre && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /organization-website
 
 COPY package*.json ./
