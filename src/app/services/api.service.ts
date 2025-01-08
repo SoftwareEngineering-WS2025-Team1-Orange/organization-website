@@ -4,8 +4,9 @@ import {
   Configuration,
   DonationsApi,
   NGOApi,
-  ProjectApi,
+  ProjectApi, ResponseToken,
 } from '../../api';
+import {TOKEN_KEY} from './constants';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,8 @@ export class ApiService {
   project = new ProjectApi(this.config);
   donation = new DonationsApi(this.config);
 
-  setToken(token: string) {
-    this.config.accessToken = token;
+  setToken(token: ResponseToken) {
+    this.config.accessToken = token.access_token;
+    localStorage.setItem(TOKEN_KEY, JSON.stringify(token));
   }
 }

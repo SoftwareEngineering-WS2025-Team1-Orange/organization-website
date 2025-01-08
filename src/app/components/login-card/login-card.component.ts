@@ -60,7 +60,7 @@ export class LoginCardComponent {
       client_secret: 'string',
     });
 
-    this.apiService.setToken(token.data.access_token);
+    this.apiService.setToken(token.data);
 
     const req = await this.apiService.ngo.ngoControllerGetMeV1();
 
