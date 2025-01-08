@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ReturnNGO } from '../../api';
 import { Router} from '@angular/router';
+import {TOKEN_KEY} from './constants';
 
 @Injectable({
   providedIn: 'root',
@@ -23,10 +24,14 @@ export class NgoStorageService {
     this.isLoggedIn = false;
     this.ngo = null;
 
-    this.router.url
+    localStorage.removeItem(TOKEN_KEY);
+
+    this.router.url;
 
     if(this.router.url === '/overview'){
       this.router.navigate(['/']).then();
     }
+
+
   }
 }
