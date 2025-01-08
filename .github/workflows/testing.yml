@@ -12,10 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - name: Checkout Repository
       uses: actions/checkout@v4
       with:
         submodules: true
+        token: ${{ secrets.ACCESS_TOKEN }}
 
     - name: Use Node.js
       uses: actions/setup-node@v4
