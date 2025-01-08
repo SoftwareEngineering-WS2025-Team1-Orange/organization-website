@@ -13,4 +13,9 @@ export class NgoStorageService {
     this.isLoggedIn = true;
     this.ngo = ngo;
   }
+
+  logout() {
+    this.isLoggedIn = false;
+    this.ngo = null;
+  }
 }

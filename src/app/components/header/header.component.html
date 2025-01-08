@@ -20,8 +20,11 @@
     </div>
   </ng-template>
   <ng-template #user>
-    <button mat-button class="user">
+    <button mat-button class="user" [matMenuTriggerFor]="menu">
       Hello {{ storageService.ngo?.name }}
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="storageService.logout()">logout</button>
+    </mat-menu>
   </ng-template>
 </div>
