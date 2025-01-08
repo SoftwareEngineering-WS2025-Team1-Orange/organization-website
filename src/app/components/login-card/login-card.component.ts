@@ -6,7 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgoStorageService } from '../../services/ngo-storage.service';
-import {  Configuration } from '../../../api';
+import { Configuration } from '../../../api';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -63,10 +63,9 @@ export class LoginCardComponent {
       client_secret: 'string',
     });
 
-    this.apiService.setToken(token.data.access_token)
+    this.apiService.setToken(token.data.access_token);
 
     const req = await this.apiService.ngo.ngoControllerGetMeV1();
-
 
     this.ngoStorage.login(req.data);
     this.router.navigate(['overview']).then();
