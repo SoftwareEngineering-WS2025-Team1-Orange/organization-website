@@ -1,7 +1,7 @@
 <input hidden type="file" #fileInput (change)="uploadImage($event)" />
 
 <div class="card big">
-  <button mat-icon-button class="editButton">
+  <button mat-icon-button class="editButton" (click)="openEditNgoDialog()">
     <mat-icon fontIcon="edit"></mat-icon>
   </button>
   <div class="name">

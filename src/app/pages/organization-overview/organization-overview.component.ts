@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import {Router} from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { EditNgoDialogComponent } from '../../dialog/edit-ngo-dialog/edit-ngo-dialog.component';
 
 @Component({
   selector: 'app-organization-overview',
@@ -20,6 +22,7 @@ export class OrganizationOverviewComponent implements OnInit{
     public ngoStorage: NgoStorageService,
     private apiService: ApiService,
     private router: Router,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +41,12 @@ export class OrganizationOverviewComponent implements OnInit{
 
       this.apiService.ngo.updateBannerUriNgo(ngo.id, file).then();
     }
+  }
+
+  openEditNgoDialog() {
+    const ref = this.dialog.open(EditNgoDialogComponent, {});
+
+
   }
 
 }
