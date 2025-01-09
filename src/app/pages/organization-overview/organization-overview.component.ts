@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { NgoStorageService } from '../../services/ngo-storage.service';
 import { ApiService } from '../../services/api.service';
 import { MatButtonModule } from '@angular/material/button';
-import { NgIf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import {Router} from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,11 +12,11 @@ import { AddProjectDialogComponent } from '../../dialog/add-project-dialog/add-p
 @Component({
   selector: 'app-organization-overview',
   standalone: true,
-  imports: [MatButtonModule, NgIf, MatIconModule],
+  imports: [MatButtonModule, NgIf, MatIconModule, NgForOf],
   templateUrl: './organization-overview.component.html',
   styleUrl: './organization-overview.component.scss',
 })
-export class OrganizationOverviewComponent implements OnInit{
+export class OrganizationOverviewComponent implements OnInit {
   imageURL: string | null = null;
 
   constructor(
@@ -27,9 +27,10 @@ export class OrganizationOverviewComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    if(!this.ngoStorage.ngo) {
+    if (!this.ngoStorage.ngo) {
       this.router.navigate(['/']).then();
     }
+    console.log(this.ngoStorage.ngo);
   }
 
   uploadImage(event: Event) {
@@ -46,38 +47,37 @@ export class OrganizationOverviewComponent implements OnInit{
 
   openEditNgoDialog() {
     const ngo = this.ngoStorage.ngo;
-    if(!ngo){
+    if (!ngo) {
       return;
     }
     const data: editNGOData = {
       name: ngo?.name ?? '',
       description: ngo?.description ?? '',
-    }
+    };
     const ref = this.dialog.open(EditNgoDialogComponent, {
-      data: data
+      data: data,
     });
-    ref.afterClosed().subscribe(result => {
-      if(!result) {
+    ref.afterClosed().subscribe((result) => {
+      if (!result) {
         return;
       }
-      this.ngoStorage.ngo = {...ngo, ...result};
+      this.ngoStorage.ngo = { ...ngo, ...result };
       this.apiService.ngo.updateNGO(ngo.id, result).then();
     });
   }
 
   openAddProjectDialog() {
     const ngo = this.ngoStorage.ngo;
-    if(!ngo){
+    if (!ngo) {
       return;
     }
 
-    const ref= this.dialog.open(AddProjectDialogComponent, {});
-    ref.afterClosed().subscribe(result => {
-      if(!result) {
+    const ref = this.dialog.open(AddProjectDialogComponent, {});
+    ref.afterClosed().subscribe((result) => {
+      if (!result) {
         return;
       }
       this.apiService.project.addProject(ngo.id, result).then();
-    })
+    });
   }
-
 }
