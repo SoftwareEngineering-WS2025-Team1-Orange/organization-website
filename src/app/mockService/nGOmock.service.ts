@@ -28,7 +28,7 @@ export class NGOService {
       address: '123 Charity Lane, Goodwill City, Country',
       contact: '+1234567890',
       scope: ['NOT_IMPLEMENTED'],
-      projects: [
+      projects:
         {
           pagination: {
             currentPage: 1,
@@ -87,7 +87,6 @@ export class NGOService {
             },
           ],
         },
-      ],
     };
     return new BehaviorSubject(ngoData).asObservable();
   }
