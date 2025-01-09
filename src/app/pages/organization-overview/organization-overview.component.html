@@ -21,7 +21,14 @@
         </button>
       </div>
     </ng-template>
-    <h1>{{ ngoStorage.ngo?.name }}</h1>
+    <h2>{{ ngoStorage.ngo?.name }}</h2>
   </div>
   <p>{{ ngoStorage.ngo?.description }}</p>
+</div>
+
+<div class="card big">
+  <button mat-icon-button class="editButton" (click)="openAddProjectDialog()">
+    <mat-icon fontIcon="add"></mat-icon>
+  </button>
+  <h2>Projects</h2>
 </div>

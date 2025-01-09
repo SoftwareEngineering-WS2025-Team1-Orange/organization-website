@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Add Project</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>NGO Name</mat-label>
+    <input matInput [formControl]="form.controls.name">
+    @if (form.controls.name.hasError('required')){
+      <mat-error>Please enter a name</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput [formControl]="form.controls.description"></textarea>
+    @if (form.controls.description.hasError('required')){
+      <mat-error>Please enter a description</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Fundraising Goal</mat-label>
+    <input matInput [formControl]="form.controls.fundraising_goal" type="number" min="0">
+    @if (form.controls.fundraising_goal.hasError('required')){
+      <mat-error>Please enter a fundraising goal</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Target Date</mat-label>
+    <input matInput [formControl]="form.controls.target_date" type="date">
+    @if (form.controls.target_date.hasError('required')){
+      <mat-error>Please enter a date</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select [formControl]="form.controls.category">
+      @for (category of Object.values(CreateProjectCategoryEnum); track category) {
+        <mat-option [value]="category">{{category}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="null">cancel</button>
+  <button mat-button (click)="save()" [disabled]="form.invalid">save</button>
+</mat-dialog-actions>

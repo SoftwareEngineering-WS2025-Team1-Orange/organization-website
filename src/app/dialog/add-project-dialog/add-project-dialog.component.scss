@@ -1,0 +1,41 @@
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+:host {
+  display: block;
+  background-color: var(--secondary);
+}
+
+h2 {
+  color: var(--white) !important;
+}
+
+button {
+  color: var(--white) !important;
+  background-color: var(--action);
+
+  &[disabled] {
+    background-color: var(--gray) !important;
+  }
+}
+
+:host ::ng-deep .mdc-text-field--filled {
+  background-color: transparent !important;
+  border-bottom: var(--gray) solid !important;
+
+  label {
+    color: var(--gray) !important;
+  }
+
+  input, textarea, select, span.mat-mdc-select-value-text {
+    color: var(--white) !important;
+  }
+}
