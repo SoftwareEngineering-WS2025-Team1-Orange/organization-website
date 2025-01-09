@@ -6,7 +6,7 @@ import { NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import {Router} from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { EditNgoDialogComponent } from '../../dialog/edit-ngo-dialog/edit-ngo-dialog.component';
+import { editNGOData, EditNgoDialogComponent } from '../../dialog/edit-ngo-dialog/edit-ngo-dialog.component';
 
 @Component({
   selector: 'app-organization-overview',
@@ -44,9 +44,24 @@ export class OrganizationOverviewComponent implements OnInit{
   }
 
   openEditNgoDialog() {
-    const ref = this.dialog.open(EditNgoDialogComponent, {});
-
-
+    const ngo = this.ngoStorage.ngo;
+    if(!ngo){
+      return;
+    }
+    const data: editNGOData = {
+      name: ngo?.name ?? '',
+      description: ngo?.description ?? '',
+    }
+    const ref = this.dialog.open(EditNgoDialogComponent, {
+      data: data
+    });
+    ref.afterClosed().subscribe(result => {
+      if(!result) {
+        return;
+      }
+      this.ngoStorage.ngo = {...ngo, ...result};
+      this.apiService.ngo.updateNGO(ngo.id, result).then();
+    });
   }
 
 }

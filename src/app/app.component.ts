@@ -32,9 +32,9 @@ export class AppComponent implements OnInit {
       response => response,
       async error => {
         const originalRequest = error.config;
-        console.log(error)
         if (error.response.status !== 401
-          || originalRequest._retry){
+          || originalRequest._retry
+          || !localStorage.getItem(TOKEN_KEY)){
           return Promise.reject(error);
         }
         originalRequest._retry = true;
