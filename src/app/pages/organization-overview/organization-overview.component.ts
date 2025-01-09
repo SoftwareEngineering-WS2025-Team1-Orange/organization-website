@@ -73,7 +73,10 @@ export class OrganizationOverviewComponent implements OnInit{
 
     const ref= this.dialog.open(AddProjectDialogComponent, {});
     ref.afterClosed().subscribe(result => {
-      console.log(result);
+      if(!result) {
+        return;
+      }
+      this.apiService.project.addProject(ngo.id, result).then();
     })
   }
 

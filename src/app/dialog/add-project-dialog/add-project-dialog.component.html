@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Add Project</h2>
 <mat-dialog-content>
   <mat-form-field>
-    <mat-label>NGO Name</mat-label>
+    <mat-label>Name</mat-label>
     <input matInput [formControl]="form.controls.name">
     @if (form.controls.name.hasError('required')){
       <mat-error>Please enter a name</mat-error>
