@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import {ApiService} from './services/api.service';
 import {NgoStorageService} from './services/ngo-storage.service';
-import {TOKEN_KEY} from './services/constants';
+import {CLIENT_ID, CLIENT_SECRET, TOKEN_KEY} from './services/constants';
 import { ResponseToken} from '../api';
 import globalAxios from 'axios';
 
@@ -41,8 +41,8 @@ export class AppComponent implements OnInit {
         try {
           const response = await this.apiService.auth.getToken({
             grant_type: 'refreshToken',
-            client_id: 'string',
-            client_secret: 'string',
+            client_id: CLIENT_ID,
+            client_secret: CLIENT_SECRET,
           })
           this.apiService.setToken(response.data);
           return globalAxios(originalRequest);

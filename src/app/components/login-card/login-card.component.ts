@@ -7,6 +7,8 @@ import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgoStorageService } from '../../services/ngo-storage.service';
 import { ApiService } from '../../services/api.service';
+import {CLIENT_ID, CLIENT_SECRET} from '../../services/constants';
+import {Scope} from '../../../api';
 
 @Component({
   selector: 'app-login-card',
@@ -56,8 +58,9 @@ export class LoginCardComponent {
       username: this.form.controls.mail.value ?? '',
       password: this.form.controls.password.value ?? '',
       grant_type: 'password',
-      client_id: 'string',
-      client_secret: 'string',
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      scope: Object.values(Scope),
     });
 
     this.apiService.setToken(token.data);
