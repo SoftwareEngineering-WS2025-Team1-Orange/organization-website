@@ -38,43 +38,45 @@
   <h2>Projects</h2>
   <div class="projects-grid">
     @for (project of ngoStorage.ngo?.projects?.projects; track project.id) {
-      <div class="project-card">
-        @if (project.banner_uri) {
-          <img
-            [src]="project.banner_uri"
-            height="100"
-            width="200"
-            alt="project banner"
-          />
-        } @else {
-          <div class="missing-img"></div>
-        }
-        <h3>{{ project.name }}</h3>
+      <a [routerLink]="'/overview/project/' + project.id">
+        <div class="project-card">
+          @if (project.banner_uri) {
+            <img
+              [src]="project.banner_uri"
+              height="100"
+              width="200"
+              alt="project banner"
+            />
+          } @else {
+            <div class="missing-img"></div>
+          }
+          <h3>{{ project.name }}</h3>
 
-        <div class="progress">
-          <h4>Donation Goal</h4>
-          <div class="progress-bar">
-            <div
-              class="progress-bar-green"
-              [style.width.%]="
-                (project.fundraising_current * 100) / project.fundraising_goal
-              "
-            ></div>
+          <div class="progress">
+            <h4>Progress</h4>
+            <div class="progress-bar">
+              <div
+                class="progress-bar-green"
+                [style.width.%]="project.progress"
+              ></div>
+            </div>
           </div>
-        </div>
 
-        <div class="progress">
-          <h4>Progress</h4>
-          <div class="progress-bar">
-            <div
-              class="progress-bar-green"
-              [style.width.%]="project.progress"
-            ></div>
+          <div class="progress">
+            <h4>Fund Raising</h4>
+            <div class="progress-bar">
+              <div
+                class="progress-bar-green"
+                [style.width.%]="
+                  (project.fundraising_current * 100) / project.fundraising_goal
+                "
+              ></div>
+            </div>
           </div>
-        </div>
 
-        <div class="backdrop"></div>
-      </div>
+          <div class="backdrop"></div>
+        </div>
+      </a>
     }
   </div>
 </div>

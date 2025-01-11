@@ -38,17 +38,14 @@ export class AppComponent implements OnInit {
           return Promise.reject(error);
         }
         originalRequest._retry = true;
-        try {
-          const response = await this.apiService.auth.getToken({
-            grant_type: 'refreshToken',
-            client_id: CLIENT_ID,
-            client_secret: CLIENT_SECRET,
-          });
-          this.apiService.setToken(response.data);
-          return globalAxios(originalRequest);
-        } catch (refreshError) {
-          return Promise.reject(refreshError);
-        }
+
+        const response = await this.apiService.auth.getToken({
+          grant_type: 'refreshToken',
+          client_id: CLIENT_ID,
+          client_secret: CLIENT_SECRET,
+        });
+        this.apiService.setToken(response.data);
+        return globalAxios(originalRequest);
       },
     );
   }

@@ -45,6 +45,16 @@ mat-form-field {
   input {
     color: var(--white) !important;
   }
+
+  .mdc-line-ripple {
+    &:before{
+      display: none;
+    }
+
+    &:after {
+      display: none;
+    }
+  }
 }
 
 .mat-green {

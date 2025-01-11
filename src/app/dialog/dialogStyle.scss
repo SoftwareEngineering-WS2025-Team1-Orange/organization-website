@@ -37,5 +37,16 @@ button {
 
   input, textarea, select, span.mat-mdc-select-value-text {
     color: var(--white) !important;
+    caret-color: var(--white) !important;
+  }
+
+  .mdc-line-ripple {
+    &:before{
+      display: none;
+    }
+
+    &:after {
+      display: none;
+    }
   }
 }

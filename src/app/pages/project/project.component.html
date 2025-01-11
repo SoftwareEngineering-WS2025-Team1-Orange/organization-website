@@ -1,0 +1,47 @@
+@if (project){
+  <div class="card">
+    <button class="img-btn" (click)="fileInput.click()">
+      @if(imageURL){
+        <img [src]="imageURL" alt="project banner">
+      } @else if (project.banner_uri){
+        <img [src]="project.banner_uri" alt="project banner">
+      } @else {
+        <div class="empty-img">
+          <mat-icon fontIcon="upload"></mat-icon>
+        </div>
+      }
+    </button>
+
+    <div class="content">
+
+      <div class="top-bar">
+
+        <h1>{{project.name}} <label>{{project.category.replace('_', ' ')}} - {{project.target_date | date:'dd/MM/yyyy'}}</label></h1>
+        <button mat-icon-button class="editButton" (click)="openEditProjectDialog()">
+          <mat-icon fontIcon="edit"></mat-icon>
+        </button>
+      </div>
+
+
+      <div class="progress-bar">
+        <h4>Progress</h4>
+        <div class="loading-bar"></div>
+        <div class="progress" [style.width.%]="project.progress"></div>
+        <label class="current">{{project.progress}} %</label>
+      </div>
+
+      <div class="progress-bar">
+        <h4>Fund Raising</h4>
+        <div class="loading-bar"></div>
+        <div class="progress" [style.width.%]="(project.fundraising_current * 100) / project.fundraising_goal"></div>
+        <label class="current">{{project.fundraising_current}} €</label>
+        <label class="total">{{project.fundraising_goal}} €</label>
+      </div>
+
+      <p class="project-desc">{{project.description}}</p>
+
+    </div>
+  </div>
+
+  <input hidden type="file" #fileInput (change)="uploadImage($event)" />
+}

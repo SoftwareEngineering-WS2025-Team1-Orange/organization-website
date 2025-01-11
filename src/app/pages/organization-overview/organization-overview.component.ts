@@ -4,7 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import {
   editNGOData,
@@ -15,7 +15,7 @@ import { AddProjectDialogComponent } from '../../dialog/add-project-dialog/add-p
 @Component({
   selector: 'app-organization-overview',
   standalone: true,
-  imports: [MatButtonModule, NgIf, MatIconModule],
+  imports: [MatButtonModule, NgIf, MatIconModule, RouterLink],
   templateUrl: './organization-overview.component.html',
   styleUrl: './organization-overview.component.scss',
 })
@@ -33,7 +33,6 @@ export class OrganizationOverviewComponent implements OnInit {
     if (!this.ngoStorage.ngo) {
       this.router.navigate(['/']).then();
     }
-    console.log(this.ngoStorage.ngo);
   }
 
   uploadImage(event: Event) {

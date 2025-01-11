@@ -31,6 +31,7 @@ img.ngoBanner {
   border-radius: 30px;
   height: 60px !important;
   width: 60px !important;
+  object-fit: cover;
 }
 
 .uploadBanner {
@@ -60,6 +61,10 @@ img.ngoBanner {
   flex-wrap: wrap;
   gap: 32px;
 
+  a {
+    text-decoration: none;
+  }
+
   .project-card {
     width: 200px;
     height: 200px;
@@ -69,6 +74,10 @@ img.ngoBanner {
     overflow: hidden;
     position: relative;
     cursor: pointer;
+
+    img {
+      object-fit: cover;
+    }
 
     .backdrop {
       position: absolute;
