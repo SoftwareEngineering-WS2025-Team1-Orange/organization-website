@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgoStorageService } from '../../services/ngo-storage.service';
 import { ApiService } from '../../services/api.service';
 import { MatButtonModule } from '@angular/material/button';
-import { NgForOf, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
