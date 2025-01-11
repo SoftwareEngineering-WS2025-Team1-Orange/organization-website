@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
-import {ApiService} from './services/api.service';
-import {NgoStorageService} from './services/ngo-storage.service';
-import {CLIENT_ID, CLIENT_SECRET, TOKEN_KEY} from './services/constants';
-import { ResponseToken} from '../api';
+import { ApiService } from './services/api.service';
+import { NgoStorageService } from './services/ngo-storage.service';
+import { CLIENT_ID, CLIENT_SECRET, TOKEN_KEY } from './services/constants';
+import { ResponseToken } from '../api';
 import globalAxios from 'axios';
 
 @Component({
@@ -15,12 +15,10 @@ import globalAxios from 'axios';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-
   constructor(
     private apiService: ApiService,
     private ngoStorage: NgoStorageService,
-  )
-  {}
+  ) {}
 
   ngOnInit(): void {
     this.initRefreshToken();
@@ -29,12 +27,14 @@ export class AppComponent implements OnInit {
 
   initRefreshToken() {
     globalAxios.interceptors.response.use(
-      response => response,
-      async error => {
+      (response) => response,
+      async (error) => {
         const originalRequest = error.config;
-        if (error.response.status !== 401
-          || originalRequest._retry
-          || !localStorage.getItem(TOKEN_KEY)){
+        if (
+          error.response.status !== 401 ||
+          originalRequest._retry ||
+          !localStorage.getItem(TOKEN_KEY)
+        ) {
           return Promise.reject(error);
         }
         originalRequest._retry = true;
@@ -43,21 +43,21 @@ export class AppComponent implements OnInit {
             grant_type: 'refreshToken',
             client_id: CLIENT_ID,
             client_secret: CLIENT_SECRET,
-          })
+          });
           this.apiService.setToken(response.data);
           return globalAxios(originalRequest);
         } catch (refreshError) {
           return Promise.reject(refreshError);
         }
-      }
-    )
+      },
+    );
   }
 
   async loadUser() {
-    const tokenString =  localStorage.getItem(TOKEN_KEY);
+    const tokenString = localStorage.getItem(TOKEN_KEY);
 
     if (!tokenString) {
-      return
+      return;
     }
 
     const token: ResponseToken = JSON.parse(tokenString);

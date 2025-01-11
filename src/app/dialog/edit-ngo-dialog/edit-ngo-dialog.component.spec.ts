@@ -8,9 +8,8 @@ describe('EditNgoDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditNgoDialogComponent]
-    })
-    .compileComponents();
+      imports: [EditNgoDialogComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EditNgoDialogComponent);
     component = fixture.componentInstance;
