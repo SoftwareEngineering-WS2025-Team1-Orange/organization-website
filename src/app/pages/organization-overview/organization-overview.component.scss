@@ -54,3 +54,71 @@ img.ngoBanner {
   width: 84px !important;
   height: 84px !important;
 }
+
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+
+  .project-card {
+    width: 200px;
+    height: 200px;
+    background-color: var(--white);
+    color: black;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+
+    .backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 50%;
+      background-color: black;
+      display: none;
+    }
+
+    &:hover .backdrop {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .missing-img {
+      background-color: var(--gray);
+      width: 200px;
+      height: 100px;
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .progress {
+      padding: 0 8px;
+
+      h4 {
+        font-size: 8px;
+        font-weight: normal;
+        margin: 5px 0;
+      }
+
+      .progress-bar {
+        background-color: var(--gray);
+        width: 100%;
+        height: 5px;
+        border-radius: 5px;
+        overflow: hidden;
+
+        .progress-bar-green {
+          background-color: var(--action);
+          height: 100%;
+        }
+      }
+    }
+  }
+}
