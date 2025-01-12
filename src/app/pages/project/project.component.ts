@@ -1,13 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NgoStorageService} from '../../services/ngo-storage.service';
-import {ReturnProjectWithoutFav} from '../../../api';
-import {ApiService} from '../../services/api.service';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {EditProjectComponent, editProjectData} from '../../dialog/edit-project/edit-project.component';
-import {MatDialog} from '@angular/material/dialog';
-import {DatePipe} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgoStorageService } from '../../services/ngo-storage.service';
+import { ReturnProjectWithoutFav } from '../../../api';
+import { ApiService } from '../../services/api.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import {
+  EditProjectComponent,
+  editProjectData,
+} from '../../dialog/edit-project/edit-project.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-project',
@@ -29,9 +32,7 @@ export class ProjectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const project_id: number = Number(
-      this.activatedRoute.snapshot.params['id'],
-    );
+    const project_id = Number(this.activatedRoute.snapshot.params['id']);
     const ngo = this.ngoStorage.ngo;
 
     const project = ngo?.projects.projects.find(
@@ -56,7 +57,9 @@ export class ProjectComponent implements OnInit {
       const ngoProject = ngo.projects.projects.find(
         (p) => p.id === this.project?.id,
       );
-      ngoProject ? (ngoProject.banner_uri = this.imageURL) : null;
+      if (ngoProject) {
+        ngoProject.banner_uri = this.imageURL;
+      }
 
       this.apiService.project
         .projectControllerPatchProjectBannerV1(ngo.id, this.project.id, file)

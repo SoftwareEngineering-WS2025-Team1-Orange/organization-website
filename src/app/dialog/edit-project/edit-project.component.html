@@ -10,20 +10,15 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Fundraising Goal</mat-label>
-    <input
-      matInput
-      [(ngModel)]="data.fundraising_goal"
-      type="number"
-      min="1"
-    />
+    <input matInput [(ngModel)]="data.fundraising_goal" type="number" min="1" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Category</mat-label>
     <mat-select [(ngModel)]="data.category">
       @for (
-          category of Object.values(CreateProjectCategoryEnum);
+        category of Object.values(CreateProjectCategoryEnum);
         track category
-        ) {
+      ) {
         <mat-option [value]="category">{{ category }}</mat-option>
       }
     </mat-select>

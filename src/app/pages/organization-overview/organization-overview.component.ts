@@ -4,7 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import {
   editNGOData,
