@@ -4,9 +4,7 @@
       <mat-icon fontIcon="arrow_back_ios"></mat-icon>
     </a>
     <button class="img-btn" (click)="fileInput.click()">
-      @if (imageURL) {
-        <img [src]="imageURL" alt="project banner" />
-      } @else if (project.banner_uri) {
+      @if (project.banner_uri) {
         <img [src]="project.banner_uri" alt="project banner" />
       } @else {
         <div class="empty-img">
@@ -54,6 +52,18 @@
       </div>
 
       <p class="project-desc">{{ project.description }}</p>
+
+      <mat-expansion-panel (opened)="loadDonations()">
+        <mat-expansion-panel-header>Donations</mat-expansion-panel-header>
+        <mat-list>
+          @for (donation of donations; track $index) {
+            <mat-list-item>
+              <span>{{ donation.donator.name }}</span>
+              <span>{{ donation.amount }} €</span>
+            </mat-list-item>
+          }
+        </mat-list>
+      </mat-expansion-panel>
     </div>
   </div>
 

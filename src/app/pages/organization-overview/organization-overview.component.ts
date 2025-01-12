@@ -20,8 +20,6 @@ import { AddProjectDialogComponent } from '../../dialog/add-project-dialog/add-p
   styleUrl: './organization-overview.component.scss',
 })
 export class OrganizationOverviewComponent implements OnInit {
-  imageURL: string | null = null;
-
   constructor(
     public ngoStorage: NgoStorageService,
     private apiService: ApiService,
@@ -41,8 +39,7 @@ export class OrganizationOverviewComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (ngo && input.files && input.files[0]) {
       const file = input.files[0];
-      this.imageURL = URL.createObjectURL(file);
-
+      ngo.banner_uri = URL.createObjectURL(file);
       this.apiService.ngo.updateBannerUriNgo(ngo.id, file).then();
     }
   }
@@ -63,7 +60,7 @@ export class OrganizationOverviewComponent implements OnInit {
       if (!result) {
         return;
       }
-      this.ngoStorage.ngo = { ...ngo, ...result };
+      Object.assign(ngo, result);
       this.apiService.ngo.updateNGO(ngo.id, result).then();
     });
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgoStorageService } from '../../services/ngo-storage.service';
-import { ReturnProjectWithoutFav } from '../../../api';
+import { DonationGet, ReturnProjectWithoutFav } from '../../../api';
 import { ApiService } from '../../services/api.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,17 +11,26 @@ import {
 } from '../../dialog/edit-project/edit-project.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, DatePipe, RouterLink],
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    DatePipe,
+    RouterLink,
+    MatExpansionModule,
+    MatListModule,
+  ],
   templateUrl: './project.component.html',
   styleUrl: './project.component.scss',
 })
 export class ProjectComponent implements OnInit {
   project: ReturnProjectWithoutFav | undefined;
-  imageURL = '';
+  donations: DonationGet[] | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -33,9 +42,8 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit(): void {
     const project_id = Number(this.activatedRoute.snapshot.params['id']);
-    const ngo = this.ngoStorage.ngo;
 
-    const project = ngo?.projects.projects.find(
+    const project = this.ngoStorage.ngo?.projects.projects.find(
       (project) => project.id === project_id,
     );
 
@@ -48,21 +56,25 @@ export class ProjectComponent implements OnInit {
   }
 
   uploadImage(event: Event) {
-    const ngo = this.ngoStorage.ngo;
-
     const input = event.target as HTMLInputElement;
-    if (ngo && this.project && input.files && input.files[0]) {
+
+    if (this.ngoStorage.ngo && this.project && input.files && input.files[0]) {
       const file = input.files[0];
-      this.imageURL = URL.createObjectURL(file);
-      const ngoProject = ngo.projects.projects.find(
+      const imgURL = URL.createObjectURL(file);
+      this.project.banner_uri = imgURL;
+      const ngoProject = this.ngoStorage.ngo.projects.projects.find(
         (p) => p.id === this.project?.id,
       );
       if (ngoProject) {
-        ngoProject.banner_uri = this.imageURL;
+        ngoProject.banner_uri = imgURL;
       }
 
       this.apiService.project
-        .projectControllerPatchProjectBannerV1(ngo.id, this.project.id, file)
+        .projectControllerPatchProjectBannerV1(
+          this.ngoStorage.ngo.id,
+          this.project.id,
+          file,
+        )
         .then();
     }
   }
@@ -81,29 +93,40 @@ export class ProjectComponent implements OnInit {
       data: data,
     });
     ref.afterClosed().subscribe((result) => {
-      if (
-        !result ||
-        !this.ngoStorage.ngo ||
-        !this.project ||
-        !this.ngoStorage.ngo
-      ) {
+      if (!result || !this.ngoStorage.ngo || !this.project) {
         return;
       }
 
-      this.project = { ...this.project, ...result };
-
-      if (!this.project) {
-        return;
-      }
-
-      const index = this.ngoStorage.ngo?.projects.projects.findIndex(
-        (p) => p.id === this.project?.id,
-      );
-      this.ngoStorage.ngo.projects.projects[index] = this.project;
+      Object.assign(this.project, result);
 
       this.apiService.project
         .updateProject(this.ngoStorage.ngo.id, this.project.id, result)
         .then();
     });
+  }
+
+  async loadDonations() {
+    if (!this.ngoStorage.ngo || !this.project || this.donations) {
+      return;
+    }
+    this.donations = [
+      {
+        donator: { name: 'Tobias' },
+        amount: 5,
+      },
+      {
+        donator: { name: 'Samuel' },
+        amount: 10,
+      },
+      {
+        donator: { name: 'Simon' },
+        amount: 7,
+      },
+    ];
+    const response = await this.apiService.donation.getDonations(
+      this.ngoStorage.ngo.id,
+      this.project.id,
+    );
+    this.donations = response.data;
   }
 }

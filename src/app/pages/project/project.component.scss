@@ -19,6 +19,32 @@
   position: relative;
 }
 
+mat-list-item span  {
+  color: var(--white);
+
+  &:first-child{
+    float: left;
+  }
+
+  &:last-child{
+    float: right;
+    color: var(--action);
+  }
+}
+
+mat-list-item:not(:last-child) {
+  border-bottom: 3px solid var(--gray);
+}
+
+:host::ng-deep.mat-expansion-indicator::after{
+  color: white;
+}
+
+mat-expansion-panel{
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
 img, .empty-img {
   width: 100%;
   aspect-ratio: 3;

@@ -9,10 +9,10 @@
       mat-icon-button
       (click)="fileInput.click()"
       class="banner-button"
-      *ngIf="imageURL || ngoStorage.ngo?.banner_uri; else upload"
+      *ngIf="ngoStorage.ngo?.banner_uri; else upload"
     >
       <img
-        [src]="imageURL ?? ngoStorage.ngo?.banner_uri"
+        [src]="ngoStorage.ngo?.banner_uri"
         alt="banner"
         class="ngoBanner"
         width="60"
