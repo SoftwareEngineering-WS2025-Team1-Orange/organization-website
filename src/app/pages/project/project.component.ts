@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { NgoStorageService } from '../../services/ngo-storage.service';
 import { ReturnProjectWithoutFav } from '../../../api';
 import { ApiService } from '../../services/api.service';
@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, DatePipe],
+  imports: [MatButtonModule, MatIconModule, DatePipe, RouterLink],
   templateUrl: './project.component.html',
   styleUrl: './project.component.scss',
 })

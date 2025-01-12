@@ -3,6 +3,12 @@
   justify-content: center;
 }
 
+.return-btn {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
 .card {
   color: var(--white);
   background-color: var(--secondary);
@@ -10,6 +16,7 @@
 
   width: 100%;
   max-width: 1000px;
+  position: relative;
 }
 
 img, .empty-img {

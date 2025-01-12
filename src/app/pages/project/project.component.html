@@ -1,5 +1,8 @@
 @if (project) {
   <div class="card">
+    <a class="return-btn" mat-icon-button [routerLink]="'/overview'">
+      <mat-icon fontIcon="arrow_back_ios"></mat-icon>
+    </a>
     <button class="img-btn" (click)="fileInput.click()">
       @if (imageURL) {
         <img [src]="imageURL" alt="project banner" />
