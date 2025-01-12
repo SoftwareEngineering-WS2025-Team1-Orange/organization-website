@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddProjectDialogComponent } from './add-project-dialog.component';
+import { MatDialogRef } from '@angular/material/dialog';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AddProjectDialogComponent', () => {
   let component: AddProjectDialogComponent;
@@ -8,7 +10,8 @@ describe('AddProjectDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddProjectDialogComponent],
+      imports: [AddProjectDialogComponent, NoopAnimationsModule],
+      providers: [{ provide: MatDialogRef, useValue: {} }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AddProjectDialogComponent);
