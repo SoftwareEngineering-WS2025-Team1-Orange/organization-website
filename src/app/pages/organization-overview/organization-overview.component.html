@@ -1,4 +1,10 @@
-<input hidden type="file" #fileInput (change)="uploadImage($event)" />
+<input
+  hidden
+  type="file"
+  #fileInput
+  (change)="uploadImage($event)"
+  accept=".png,.jpeg,.jpg"
+/>
 
 <div class="card big">
   <button mat-icon-button class="editButton" (click)="openEditNgoDialog()">
