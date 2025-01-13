@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
         originalRequest._retry = true;
 
         const response = await this.apiService.auth.getToken({
-          grant_type: 'refreshToken',
+          grant_type: 'refresh_token',
           client_id: CLIENT_ID,
           client_secret: CLIENT_SECRET,
         });
