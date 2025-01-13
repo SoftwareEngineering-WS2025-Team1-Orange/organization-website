@@ -2,7 +2,7 @@ name: "Build preview"
 
 on:
   push:
-    branches: [main]
+    branches: [main, staging]
 
 env:
   REGISTRY: ghcr.io
