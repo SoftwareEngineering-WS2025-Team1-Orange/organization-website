@@ -13,7 +13,7 @@ COPY . .
 
 RUN npm run generate:api
 
-RUN npm run build --omit=dev --configuration=${CONFIGURATION}
+RUN npm run build -- -- --configuration=${CONFIGURATION}
 
 FROM nginx:1.27.2-bookworm AS runner
 
