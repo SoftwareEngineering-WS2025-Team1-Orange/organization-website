@@ -49,6 +49,7 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{ env.repo }}:preview
+          build-args: CONFIGURATION=staging
 
   deploy:
     name: "Deploy to staging"

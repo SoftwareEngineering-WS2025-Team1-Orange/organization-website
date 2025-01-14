@@ -8,13 +8,14 @@ import {
   ResponseToken,
 } from '../../api';
 import { TOKEN_KEY } from './constants';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   config = new Configuration({
-    basePath: 'https://preview-mainframe.sokutan.de/api/v1',
+    basePath: environment.apiURL,
   });
   ngo = new NGOApi(this.config);
   auth = new AuthApi(this.config);

@@ -52,6 +52,7 @@ jobs:
           tags: |
             ${{ steps.meta.outputs.tags }}
             ghcr.io/${{ env.repo }}:latest
+          build-args: CONFIGURATION=production
 
   deploy:
     name: "Deploy to prod"
