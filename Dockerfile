@@ -1,6 +1,6 @@
 FROM node:22 AS builder
 
-ARG CONFIGURATION="production"
+ARG CONFIGURATION=production
 
 # Install Java
 RUN apt-get update && apt-get install -y openjdk-17-jre && rm -rf /var/lib/apt/lists/*
@@ -15,7 +15,7 @@ COPY . .
 
 RUN npm run generate:api
 
-RUN npm run build -- -- --configuration=${CONFIGURATION}
+RUN npm run build -- -- --configuration=$CONFIGURATION
 
 FROM nginx:1.27.2-bookworm AS runner
 
