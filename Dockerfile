@@ -1,3 +1,5 @@
+ARG CONFIGURATION=production
+
 FROM node:22 AS builder
 
 # Install Java
