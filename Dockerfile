@@ -1,6 +1,6 @@
-ARG CONFIGURATION="production"
-
 FROM node:22 AS builder
+
+ARG CONFIGURATION="production"
 
 # Install Java
 RUN apt-get update && apt-get install -y openjdk-17-jre && rm -rf /var/lib/apt/lists/*
