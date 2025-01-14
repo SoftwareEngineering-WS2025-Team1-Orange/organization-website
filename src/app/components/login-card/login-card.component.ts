@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { NgoStorageService } from '../../services/ngo-storage.service';
 import { ApiService } from '../../services/api.service';
 import { CLIENT_ID, CLIENT_SECRET } from '../../services/constants';
-import { Scope } from '../../../api';
+import {RequestTokenScopeEnum} from '../../../api';
 
 @Component({
   selector: 'app-login-card',
@@ -60,7 +60,7 @@ export class LoginCardComponent {
       grant_type: 'password',
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      scope: Object.values(Scope),
+      scope: Object.values(RequestTokenScopeEnum),
     });
 
     this.apiService.setToken(token.data);
