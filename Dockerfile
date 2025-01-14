@@ -1,4 +1,4 @@
-ARG CONFIGURATION=production
+ARG CONFIGURATION="production"
 
 FROM node:22 AS builder
 
