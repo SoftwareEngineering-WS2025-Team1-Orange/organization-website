@@ -74,16 +74,7 @@
             @for (donation of donations?.donations; track $index) {
               <mat-list-item>
                 <span>{{ donation.createdAt | date: "dd/MM/yyyy" }}</span>
-                @if (donation.amountInCent % 100 === 0) {
-                  <span>{{ Math.floor(donation.amountInCent / 100) }} €</span>
-                } @else {
-                  <span
-                    >{{ Math.floor(donation.amountInCent / 100) }},{{
-                      donation.amountInCent % 100
-                    }}
-                    €</span
-                  >
-                }
+                <span>{{ (donation.amountInCent / 100).toFixed(2) }} €</span>
               </mat-list-item>
             }
           </mat-list>
