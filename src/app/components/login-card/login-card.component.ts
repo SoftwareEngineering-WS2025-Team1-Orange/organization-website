@@ -9,6 +9,7 @@ import { NgoStorageService } from '../../services/ngo-storage.service';
 import { ApiService } from '../../services/api.service';
 import { CLIENT_ID, CLIENT_SECRET } from '../../services/constants';
 import { RequestTokenScopeEnum } from '../../../api';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-login-card',
@@ -19,12 +20,14 @@ import { RequestTokenScopeEnum } from '../../../api';
     MatInputModule,
     ReactiveFormsModule,
     NgIf,
+    MatIconModule,
   ],
   templateUrl: './login-card.component.html',
   styleUrl: './login-card.component.scss',
 })
 export class LoginCardComponent {
   @Input() isSignUp = false;
+  showPassword = false;
 
   form = new FormGroup({
     name: new FormControl(''),
@@ -65,8 +68,8 @@ export class LoginCardComponent {
 
     this.apiService.setToken(token.data);
 
-    this.ngoStorage.loadNGO().then(() =>
-      this.router.navigate(['overview']).then()
-    );
+    this.ngoStorage
+      .loadNGO()
+      .then(() => this.router.navigate(['overview']).then());
   }
 }
