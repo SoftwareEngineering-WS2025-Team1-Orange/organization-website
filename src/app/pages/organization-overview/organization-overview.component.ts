@@ -53,6 +53,7 @@ export class OrganizationOverviewComponent implements OnInit {
     const data: editNGOData = {
       name: ngo?.name ?? '',
       description: ngo?.description ?? '',
+      website_url: ngo?.website_url ?? '',
     };
     const ref = this.dialog.open(EditNgoDialogComponent, {
       data: data,

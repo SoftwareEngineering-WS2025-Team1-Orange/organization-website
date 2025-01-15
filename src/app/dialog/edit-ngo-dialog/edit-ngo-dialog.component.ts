@@ -32,4 +32,5 @@ export class EditNgoDialogComponent {
 export interface editNGOData {
   name: string;
   description: string;
+  website_url: string;
 }
