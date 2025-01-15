@@ -72,6 +72,11 @@ img, .empty-img {
   justify-content: space-between;
   align-items: flex-start;
 
+  div {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   h1{
 
     position: relative;
