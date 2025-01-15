@@ -20,6 +20,7 @@ import {
   AddProgressDialogComponent,
   editProgressData,
 } from '../../dialog/add-progress-dialog/add-progress-dialog.component';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-project',
@@ -31,6 +32,7 @@ import {
     RouterLink,
     MatExpansionModule,
     MatListModule,
+    MatTableModule,
   ],
   templateUrl: './project.component.html',
   styleUrl: './project.component.scss',
@@ -38,6 +40,7 @@ import {
 export class ProjectComponent implements OnInit {
   project: ReturnProjectWithoutFav | undefined;
   donations: ReturnPaginatedDonations | undefined;
+  displayedColumns: string[] = ['amount', 'time'];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -143,7 +146,8 @@ export class ProjectComponent implements OnInit {
       undefined,
       this.project.id,
     );
-    console.log(response);
     this.donations = response.data;
   }
+
+  protected readonly Math = Math;
 }

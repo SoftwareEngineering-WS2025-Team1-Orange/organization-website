@@ -58,11 +58,27 @@
 
       <mat-expansion-panel (opened)="loadDonations()">
         <mat-expansion-panel-header>Donations</mat-expansion-panel-header>
-        <mat-list>
-          @for (donation of donations?.donations; track donation.id) {
-            <mat-list-item> </mat-list-item>
-          }
-        </mat-list>
+        @if (donations?.donations?.length === 0) {
+          <span>No donations</span>
+        } @else {
+          <mat-list>
+            @for (donation of donations?.donations; track $index) {
+              <mat-list-item>
+                <span>{{ donation.createdAt | date: "dd/MM/yyyy" }}</span>
+                @if (donation.amountInCent % 100 === 0) {
+                  <span>{{ Math.floor(donation.amountInCent / 100) }} €</span>
+                } @else {
+                  <span
+                    >{{ Math.floor(donation.amountInCent / 100) }},{{
+                      donation.amountInCent % 100
+                    }}
+                    €</span
+                  >
+                }
+              </mat-list-item>
+            }
+          </mat-list>
+        }
       </mat-expansion-panel>
     </div>
   </div>
