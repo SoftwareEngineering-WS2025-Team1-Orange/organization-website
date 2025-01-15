@@ -59,8 +59,12 @@
             (project.fundraising_current * 100) / project.fundraising_goal
           "
         ></div>
-        <span class="current">{{ project.fundraising_current }} €</span>
-        <span class="total">{{ project.fundraising_goal }} €</span>
+        <span class="current"
+          >{{ (project.fundraising_current / 100).toFixed(2) }} €</span
+        >
+        <span class="total"
+          >{{ (project.fundraising_goal / 100).toFixed(2) }} €</span
+        >
       </div>
 
       <p class="project-desc">{{ project.description }}</p>

@@ -145,6 +145,7 @@ p.project-desc {
     background-color: var(--action);
     transform: skewX(30deg);
     z-index: 1;
+    max-width: 100%;
   }
 
   .current {
