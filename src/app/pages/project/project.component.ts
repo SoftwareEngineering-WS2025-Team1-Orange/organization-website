@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgoStorageService } from '../../services/ngo-storage.service';
-import { ReturnPaginatedDonations, ReturnProjectWithoutFav} from '../../../api';
+import {
+  ReturnPaginatedDonations,
+  ReturnProjectWithoutFav,
+} from '../../../api';
 import { ApiService } from '../../services/api.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +16,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
+import {
+  AddProgressDialogComponent,
+  editProgressData,
+} from '../../dialog/add-progress-dialog/add-progress-dialog.component';
 
 @Component({
   selector: 'app-project',
@@ -30,7 +37,7 @@ import { MatListModule } from '@angular/material/list';
 })
 export class ProjectComponent implements OnInit {
   project: ReturnProjectWithoutFav | undefined;
-  donations: ReturnPaginatedDonations[] | undefined;
+  donations: ReturnPaginatedDonations | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -92,7 +99,30 @@ export class ProjectComponent implements OnInit {
     const ref = this.dialog.open(EditProjectComponent, {
       data: data,
     });
-    ref.afterClosed().subscribe((result) => {
+    ref.afterClosed().subscribe((result: editProjectData) => {
+      if (!result || !this.ngoStorage.ngo || !this.project) {
+        return;
+      }
+
+      Object.assign(this.project, result);
+
+      this.apiService.project
+        .updateProject(this.ngoStorage.ngo.id, this.project.id, result)
+        .then();
+    });
+  }
+
+  openAddProgressDialog() {
+    if (!this.project) {
+      return;
+    }
+    const data: editProgressData = {
+      progress: this.project.progress,
+    };
+    const ref = this.dialog.open(AddProgressDialogComponent, {
+      data: data,
+    });
+    ref.afterClosed().subscribe((result: editProgressData) => {
       if (!result || !this.ngoStorage.ngo || !this.project) {
         return;
       }
@@ -109,7 +139,6 @@ export class ProjectComponent implements OnInit {
     if (!this.ngoStorage.ngo || !this.project || this.donations) {
       return;
     }
-    this.donations = [];
     const response = await this.apiService.donation.getDonations(
       this.ngoStorage.ngo.id,
       undefined,

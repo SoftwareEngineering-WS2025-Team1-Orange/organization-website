@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { NgoStorageService } from '../../services/ngo-storage.service';
 import { ApiService } from '../../services/api.service';
 import { CLIENT_ID, CLIENT_SECRET } from '../../services/constants';
-import {RequestTokenScopeEnum} from '../../../api';
+import { RequestTokenScopeEnum } from '../../../api';
 
 @Component({
   selector: 'app-login-card',

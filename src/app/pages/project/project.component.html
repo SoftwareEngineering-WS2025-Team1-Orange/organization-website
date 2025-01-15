@@ -36,6 +36,9 @@
         <div class="loading-bar"></div>
         <div class="progress" [style.width.%]="project.progress"></div>
         <span class="current">{{ project.progress }} %</span>
+        <button mat-icon-button (click)="openAddProgressDialog()">
+          <mat-icon fontIcon="add"></mat-icon>
+        </button>
       </div>
 
       <div class="progress-bar">
@@ -56,10 +59,8 @@
       <mat-expansion-panel (opened)="loadDonations()">
         <mat-expansion-panel-header>Donations</mat-expansion-panel-header>
         <mat-list>
-          @for (donation of donations; track $index) {
-            <mat-list-item>
-
-            </mat-list-item>
+          @for (donation of donations?.donations; track donation.id) {
+            <mat-list-item> </mat-list-item>
           }
         </mat-list>
       </mat-expansion-panel>

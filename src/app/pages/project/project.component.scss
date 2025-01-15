@@ -107,6 +107,14 @@ p.project-desc {
   position: relative;
   margin: 40px 0 32px;
 
+  button {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    color: black;
+  }
+
   h4 {
     font-weight: normal;
     margin: 5px 0;
