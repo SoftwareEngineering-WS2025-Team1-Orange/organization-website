@@ -20,7 +20,7 @@
       matInput
       [formControl]="form.controls.fundraising_goal"
       type="number"
-      min="0"
+      min="1"
     />
     @if (form.controls.fundraising_goal.hasError("required")) {
       <mat-error>Please enter a fundraising goal</mat-error>

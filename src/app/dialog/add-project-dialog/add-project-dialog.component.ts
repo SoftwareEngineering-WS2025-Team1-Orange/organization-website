@@ -41,7 +41,7 @@ export class AddProjectDialogComponent {
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    fundraising_goal: new FormControl(0, [Validators.required]),
+    fundraising_goal: new FormControl(1, [Validators.required]),
     target_date: new FormControl('', [Validators.required]),
     category: new FormControl<CreateProjectCategoryEnum>('OTHER'),
   });
