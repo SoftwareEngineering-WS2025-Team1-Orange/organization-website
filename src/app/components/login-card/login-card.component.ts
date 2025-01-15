@@ -65,9 +65,8 @@ export class LoginCardComponent {
 
     this.apiService.setToken(token.data);
 
-    const req = await this.apiService.ngo.ngoControllerGetMeV1();
-
-    this.ngoStorage.login(req.data);
-    this.router.navigate(['overview']).then();
+    this.ngoStorage.loadNGO().then(() =>
+      this.router.navigate(['overview']).then()
+    );
   }
 }

@@ -61,8 +61,6 @@ export class AppComponent implements OnInit {
 
     this.apiService.setToken(token);
 
-    const req = await this.apiService.ngo.ngoControllerGetMeV1();
-
-    this.ngoStorage.login(req.data);
+    this.ngoStorage.loadNGO().then();
   }
 }

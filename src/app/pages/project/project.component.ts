@@ -149,5 +149,13 @@ export class ProjectComponent implements OnInit {
     this.donations = response.data;
   }
 
+  deleteProjekt() {
+    if (!this.ngoStorage.ngo || !this.project) {
+      return;
+    }
+    this.apiService.project.deleteProject(this.ngoStorage.ngo.id, this.project.id).then(()=> {
+    })
+  }
+
   protected readonly Math = Math;
 }
