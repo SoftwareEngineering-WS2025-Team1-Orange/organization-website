@@ -1,5 +1,10 @@
 FROM node:22 AS builder
 
+ARG CONFIGURATION=production
+
+# Install Java
+RUN apt-get update && apt-get install -y openjdk-17-jre && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /organization-website
 
 COPY package*.json ./
@@ -8,7 +13,9 @@ RUN npm ci
 
 COPY . .
 
-RUN npm run build --omit=dev
+RUN npm run generate:api
+
+RUN npm run build:${CONFIGURATION}
 
 FROM nginx:1.27.2-bookworm AS runner
 

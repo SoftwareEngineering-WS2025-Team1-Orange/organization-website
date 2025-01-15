@@ -1,0 +1,15 @@
+@import "../dialogStyle";
+
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-slider {
+  width: 300px;
+  margin-top: 32px;
+}
+
+label {
+  color: white;
+}

@@ -1,0 +1,55 @@
+<div class="card">
+  <h1>{{ isSignUp ? "Register an Organization" : "Log in" }}</h1>
+
+  <div class="content" *ngIf="isSignUp">
+    <mat-form-field>
+      <mat-label>name</mat-label>
+      <input matInput [formControl]="form.controls.name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>address</mat-label>
+      <input matInput [formControl]="form.controls.address" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>contact</mat-label>
+      <input matInput [formControl]="form.controls.contact" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>IBAN</mat-label>
+      <input matInput />
+    </mat-form-field>
+  </div>
+
+  <div class="divider" *ngIf="isSignUp"></div>
+
+  <div class="content">
+    <mat-form-field>
+      <mat-label>mail</mat-label>
+      <input matInput type="email" [formControl]="form.controls.mail" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>password</mat-label>
+      <input
+        matInput
+        [type]="showPassword ? 'text' : 'password'"
+        [formControl]="form.controls.password"
+      />
+      <button mat-icon-button matSuffix (click)="showPassword = !showPassword">
+        <mat-icon
+          [fontIcon]="showPassword ? 'visibility' : 'visibility_off'"
+        ></mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      color="green"
+      (click)="isSignUp ? register() : login()"
+    >
+      {{ isSignUp ? "Register" : "Log in" }}
+    </button>
+  </div>
+</div>

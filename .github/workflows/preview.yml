@@ -2,7 +2,7 @@ name: "Build preview"
 
 on:
   push:
-    branches: [main]
+    branches: [main, staging]
 
 env:
   REGISTRY: ghcr.io
@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
@@ -46,3 +49,14 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{ env.repo }}:preview
+          build-args: |
+            CONFIGURATION=staging
+
+  deploy:
+    name: "Deploy to staging"
+    runs-on: "ubuntu-latest"
+    needs: build-and-push-image
+
+    steps:
+      - name: "Deploy to staging via webhook"
+        run: curl -X POST ${{ secrets.STAGING_WEBHOOK_URL }}

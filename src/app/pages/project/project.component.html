@@ -1,0 +1,102 @@
+@if (project) {
+  <div class="card">
+    <a class="return-btn" mat-icon-button [routerLink]="'/overview'">
+      <mat-icon fontIcon="arrow_back_ios"></mat-icon>
+    </a>
+    <button class="img-btn" (click)="fileInput.click()">
+      @if (project.banner_uri) {
+        <img [src]="project.banner_uri" alt="project banner" />
+      } @else {
+        <div class="empty-img">
+          <mat-icon fontIcon="upload"></mat-icon>
+        </div>
+      }
+    </button>
+
+    <div class="content">
+      <div class="top-bar">
+        <h1>
+          {{ project.name }}
+          <span
+            >{{ project.category.replace("_", " ") }} -
+            {{ project.target_date | date: "dd/MM/yyyy" }}</span
+          >
+        </h1>
+        <div>
+          <button
+            mat-icon-button
+            class="editButton"
+            (click)="openEditProjectDialog()"
+          >
+            <mat-icon fontIcon="edit"></mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="deleteButton"
+            (click)="deleteProjekt()"
+          >
+            <mat-icon fontIcon="delete"></mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="progress-bar">
+        <h4>Progress</h4>
+        <div class="loading-bar"></div>
+        <div class="progress" [style.width.%]="project.progress"></div>
+        <span class="current">{{ project.progress }} %</span>
+        <button mat-icon-button (click)="openAddProgressDialog()">
+          <mat-icon fontIcon="add"></mat-icon>
+        </button>
+      </div>
+
+      <div class="progress-bar">
+        <h4>Fund Raising</h4>
+        <div class="loading-bar"></div>
+        <div
+          class="progress"
+          [style.width.%]="
+            (project.fundraising_current * 100) / project.fundraising_goal
+          "
+        ></div>
+        <span class="current">{{ project.fundraising_current }} €</span>
+        <span class="total">{{ project.fundraising_goal }} €</span>
+      </div>
+
+      <p class="project-desc">{{ project.description }}</p>
+
+      <mat-expansion-panel (opened)="loadDonations()">
+        <mat-expansion-panel-header>Donations</mat-expansion-panel-header>
+        @if (donations?.donations?.length === 0) {
+          <span>No donations</span>
+        } @else {
+          <mat-list>
+            @for (donation of donations?.donations; track $index) {
+              <mat-list-item>
+                <span>{{ donation.createdAt | date: "dd/MM/yyyy" }}</span>
+                @if (donation.amountInCent % 100 === 0) {
+                  <span>{{ Math.floor(donation.amountInCent / 100) }} €</span>
+                } @else {
+                  <span
+                    >{{ Math.floor(donation.amountInCent / 100) }},{{
+                      donation.amountInCent % 100
+                    }}
+                    €</span
+                  >
+                }
+              </mat-list-item>
+            }
+          </mat-list>
+        }
+      </mat-expansion-panel>
+    </div>
+  </div>
+
+  <input
+    hidden
+    type="file"
+    #fileInput
+    (change)="uploadImage($event)"
+    accept=".png,.jpeg,.jpg"
+  />
+}
