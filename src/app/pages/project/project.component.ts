@@ -93,7 +93,6 @@ export class ProjectComponent implements OnInit {
     const data: editProjectData = {
       name: this.project.name,
       description: this.project.description,
-      fundraising_goal: this.project.fundraising_goal,
       category: this.project.category,
     };
     const ref = this.dialog.open(EditProjectComponent, {

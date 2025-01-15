@@ -45,6 +45,5 @@ export class EditProjectComponent {
 export interface editProjectData {
   name: string;
   description: string;
-  fundraising_goal: number;
   category: UpdateProjectDtoCategoryEnum;
 }

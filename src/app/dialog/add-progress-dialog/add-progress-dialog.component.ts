@@ -28,10 +28,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './add-progress-dialog.component.scss',
 })
 export class AddProgressDialogComponent {
-  min: number;
+  current: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: editProgressData) {
-    this.min = data.progress;
+    this.current = data.progress;
   }
 
   formatLabel(value: number): string {

@@ -1,11 +1,12 @@
 <h2 mat-dialog-title>Edit Progress</h2>
 <mat-dialog-content>
   <label [htmlFor]="'progress_input'">Progress</label>
-  <mat-slider [min]="min" max="100" [displayWith]="formatLabel" discrete>
+  <mat-slider min="0" max="100" [displayWith]="formatLabel" discrete>
     <input
       matSliderThumb
       (valueChange)="data.progress = $event"
       id="progress_input"
+      [value]="current"
     />
   </mat-slider>
 </mat-dialog-content>
