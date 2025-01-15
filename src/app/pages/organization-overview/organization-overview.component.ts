@@ -11,7 +11,7 @@ import {
   EditNgoDialogComponent,
 } from '../../dialog/edit-ngo-dialog/edit-ngo-dialog.component';
 import { AddProjectDialogComponent } from '../../dialog/add-project-dialog/add-project-dialog.component';
-import {CreateProject} from '../../../api';
+import { CreateProject } from '../../../api';
 
 @Component({
   selector: 'app-organization-overview',

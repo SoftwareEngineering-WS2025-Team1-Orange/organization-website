@@ -9,7 +9,7 @@ import { NgoStorageService } from '../../services/ngo-storage.service';
 import { ApiService } from '../../services/api.service';
 import { CLIENT_ID, CLIENT_SECRET } from '../../services/constants';
 import { RequestTokenScopeEnum } from '../../../api';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login-card',

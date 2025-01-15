@@ -153,17 +153,25 @@ export class ProjectComponent implements OnInit {
     if (!this.ngoStorage.ngo || !this.project) {
       return;
     }
-    if (!confirm('Are you sure you want to delete this project?\n(Projekts can only be deleted if there are no donations or the progress is 100%)')){
+    if (
+      !confirm(
+        'Are you sure you want to delete this project?\n(Projekts can only be deleted if there are no donations or the progress is 100%)',
+      )
+    ) {
       return;
     }
-    this.apiService.project.deleteProject(this.ngoStorage.ngo.id, this.project.id).then(()=> {
-      const removed = this.ngoStorage.ngo?.projects.projects.filter(p => p.id !== this.project?.id);
-      const projects = this.ngoStorage.ngo?.projects;
-      if(projects && removed){
-        projects.projects = removed;
-      }
-      this.router.navigate(['/overview']).then();
-    })
+    this.apiService.project
+      .deleteProject(this.ngoStorage.ngo.id, this.project.id)
+      .then(() => {
+        const removed = this.ngoStorage.ngo?.projects.projects.filter(
+          (p) => p.id !== this.project?.id,
+        );
+        const projects = this.ngoStorage.ngo?.projects;
+        if (projects && removed) {
+          projects.projects = removed;
+        }
+        this.router.navigate(['/overview']).then();
+      });
   }
 
   protected readonly Math = Math;

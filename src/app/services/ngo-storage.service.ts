@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TOKEN_KEY } from './constants';
 import { ReturnNGO } from '../../api';
-import {ApiService} from './api.service';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class NgoStorageService {
     private apiService: ApiService,
   ) {}
 
-  async loadNGO(){
+  async loadNGO() {
     const req = await this.apiService.ngo.ngoControllerGetMeV1();
     this.ngo = req.data;
     this.isLoggedIn = true;
